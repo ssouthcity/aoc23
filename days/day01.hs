@@ -10,10 +10,10 @@ main = do
   print (part2 input)
 
 part1 :: [[Char]] -> Int
-part1 = sum . map toInt . map firstAndLast . map findLiteralNumbers
+part1 = sum . map (toInt . firstAndLast . findLiteralNumbers)
 
 part2 :: [[Char]] -> Int
-part2 = sum . map toInt . map firstAndLast . map findNumbers
+part2 = sum . map (toInt . firstAndLast . findNumbers)
 
 toInt :: [Char] -> Int
 toInt = read
@@ -25,7 +25,7 @@ findNumbers :: [Char] -> [Char]
 findNumbers = mapMaybe (applyUntilJust [spelledDigits, literalDigit]) . tails
 
 isDigit :: Char -> Bool
-isDigit x = elem x "123456789"
+isDigit x = x `elem` "123456789"
 
 firstAndLast :: [Char] -> [Char]
 firstAndLast [] = error "Empty lists are not allowed"
